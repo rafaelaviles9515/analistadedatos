@@ -5,13 +5,12 @@ create table DimCausa
     incidentcause varchar(30)
 ) diststyle key;
 
-drop table DimAeroliena;
+drop table DimFecha;
 
 create table DimAeroliena
 (
     AerolienaKey INT PRIMARY KEY IDENTITY(1,1) not null sortkey distkey,
     AerolienaID VARCHAR(50),
-    iatacode varchar(30),
     airlinename varchar(100)
 ) diststyle key;
 
@@ -35,10 +34,31 @@ create table DimFecha
 (
     DateKey INT PRIMARY KEY IDENTITY(1,1) not null sortkey distkey,
     DateID VARCHAR(50),
-    flightdate date,
-    year int,
-    month int,
-    dayoffweek int
+    "Date" VARCHAR(50),
+    FullDate_Description VARCHAR(50),
+    DayNumberOfWeek int,
+    DayNumberOfMonth int,
+    DayNumberOfYear int,
+    WeekNumberOfYear int,
+    MonthNumberOfYear int,
+    CalendarQuarterOfYear int,
+    CalendarSemesterOfYear int,
+    CalendarYear int,
+    CalendarYearWeek VARCHAR(50),
+    CalendarYearMonth VARCHAR(50),
+    CalendarYearQuarter VARCHAR(50),
+    CalendarYearSemester VARCHAR(50),
+    CalendarYearWeek_Description VARCHAR(50),
+    CalendarYearMonth_Description VARCHAR(50),
+    CalendarYearQuarter_Description VARCHAR(50),
+    CalendarYearSemester_Description VARCHAR(50),
+    CalendarYear_Description VARCHAR(50),
+    EnglishDayNameOfWeek VARCHAR(50),
+    SpanishDayNameOfWeek VARCHAR(50),
+    CatalanDayNameOfWeek VARCHAR(50),
+    EnglishMonthName VARCHAR(50),
+    SpanishMonthName VARCHAR(50),
+    CatalanMonthName VARCHAR(50)
 ) diststyle key;
 
 
