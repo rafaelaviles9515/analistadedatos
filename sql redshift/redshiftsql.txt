@@ -1,0 +1,64 @@
+create table DimCausa
+(
+    CauseKey INT PRIMARY KEY IDENTITY(1,1) not null sortkey distkey,
+    CauseID VARCHAR(50),
+    incidentcause varchar(30)
+) diststyle key;
+
+drop table DimAeroliena;
+
+create table DimAeroliena
+(
+    AerolienaKey INT PRIMARY KEY IDENTITY(1,1) not null sortkey distkey,
+    AerolienaID VARCHAR(50),
+    iatacode varchar(30),
+    airlinename varchar(100)
+) diststyle key;
+
+create table DimAeroliena
+(
+    AerolienaKey INT PRIMARY KEY IDENTITY(1,1) not null sortkey distkey,
+    AerolienaID VARCHAR(50),
+    airlinename varchar(100)
+) diststyle key;
+
+create table DimAeropuerto
+(
+    AirportKey INT PRIMARY KEY IDENTITY(1,1) not null sortkey distkey,
+    AirportID VARCHAR(50),
+    city varchar(30),
+    state varchar(30)
+) diststyle key;
+
+
+create table DimFecha
+(
+    DateKey INT PRIMARY KEY IDENTITY(1,1) not null sortkey distkey,
+    DateID VARCHAR(50),
+    flightdate date,
+    year int,
+    month int,
+    dayoffweek int
+) diststyle key;
+
+
+create table FactVueloCausa
+(
+    VueloCausaKey INT PRIMARY KEY IDENTITY(1,1) not null sortkey distkey,
+    VueloID VARCHAR(50),
+    CauseKey int,
+    AerolienaKey int,
+    AirportKey int,
+    DateKey int,
+    CancelledFlight int,
+    DelayedFlight int,
+    WeatherCancellation int,
+    TireDelayed int,
+    LateArrivalDelayed int
+) diststyle key;
+
+
+ALTER TABLE FactVueloCausa ADD constraint causa FOREIGN KEY (CauseKey) REFERENCES DimCausa(CauseKey);
+ALTER TABLE FactVueloCausa ADD constraint aerolinea FOREIGN KEY (AerolienaKey) REFERENCES DimAeroliena(AerolienaKey);
+ALTER TABLE FactVueloCausa ADD constraint aeropuerto FOREIGN KEY (AirportKey) REFERENCES DimAeropuerto(AirportKey);
+ALTER TABLE FactVueloCausa ADD constraint fecha FOREIGN KEY (DateKey) REFERENCES DimFecha(DateKey);
